@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/three.js/94/three.min.js"
+    integrity="sha512-ZGgXd6TB5qjtvTU6Q5o/LJM4pwLNy8U8XXJh+vJZDXp2wC8ASrl4WOeivaq2fpYc3TnTCLzyDvVjY8YhvNYaXg=="
+    crossorigin="anonymous"
+    ></script>
+    <script>
+        var scene;        
+        var camera;
+        var renderer;
+        var material;
+        var sphere;
+        var cube;
+        var cone;
+        var torus;
+        
+        function createCamera() {
+        camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        1,
+        100
+        );
+        camera.position.z = 10;
+        }
+        
+        function createRenderer() {
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+        }
+        
+        function createSphere() {
+        let geometry = new THREE.SphereGeometry(1, 10, 10);
+        let material = new THREE.MeshBasicMaterial({
+        color: 0xffff00,
+        wireframe: true,
+        });
+        sphere = new THREE.Mesh(geometry, material);
+        scene.add(sphere);
+        sphere.position.set(-4, 2, 4);
+        }
+
+        function createCube() {
+        let geometry = new THREE.CubeGeometry(1.5, 1.5 , 1.5);
+        let material = new THREE.MeshBasicMaterial({
+        color: 0x0AFF0C,
+        wireframe: true,
+        });
+        cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+        cube.position.set(-4, -2, 4);
+        }
+
+        function createCone() {
+        let geometry = new THREE.ConeGeometry( 1, 2, 10 );
+        let material = new THREE.MeshBasicMaterial({
+        color:  0xFF3A0A,
+        wireframe: true,
+        });
+        cone = new THREE.Mesh(geometry, material);
+        scene.add(cone);
+        cone.position.set(4, 2, 4);
+        }
+
+        function createTorus() {
+        let geometry = new THREE.TorusGeometry(0.8, 0.35 ,15, 15);
+        let material = new THREE.MeshBasicMaterial({
+        color: 0x00F5FF,
+        wireframe: true,
+        });
+        torus = new THREE.Mesh(geometry, material);
+        scene.add(torus);
+        torus.position.set(4, -2, 4);
+        
+        }
+
+
+        function init() {
+        //create scene
+        scene = new THREE.Scene();
+        //create camera
+        createCamera();
+        //create sphere
+        createSphere();
+        createCube();
+        createCone();
+        createTorus();
+        //create rederer
+        createRenderer();
+        //element render
+        }
+        
+        function animate(time) {
+        sphere.rotation.x = time * 0.0005;
+        sphere.rotation.y = time * 0.0005;
+        cube.rotation.x = time * 0.0005;
+        cube.rotation.y = time * 0.0005;
+        cone.rotation.x = time * 0.0005;
+        cone.rotation.y = time * 0.0005;
+        torus.rotation.x = time * 0.0005;
+        torus.rotation.y = time * 0.0005;
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+        }
+        
+        init();
+        requestAnimationFrame(animate);
+        </script>
+   </body>
+</html>
