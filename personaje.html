@@ -27,7 +27,7 @@
       />  
       <img
         class="img"
-        src="https://static.wikia.nocookie.net/hitlerparody/images/9/9a/Mig.jpg/revision/latest/top-crop/width/360/height/450?cb=20180426093634&path-prefix=es"
+        src="https://cdn.pixabay.com/photo/2019/10/16/09/09/doraemon-4553920_1280.png"
         alt="freeCodeCamp"
       /> 
     </div>  
@@ -109,7 +109,14 @@
           color: 0xFFFFFF,
           wireframe: false,
         });
-        
+        let material2 = new THREE.MeshBasicMaterial({
+          color: 0xFF0000,
+          wireframe: false,
+        });
+        let material3 = new THREE.MeshBasicMaterial({
+          color: 0xFFCC00,
+          wireframe: false,
+        });
         //mano izquierda
         sphere2 = new THREE.Mesh(geometry, material);
         scene.add(sphere2);
@@ -131,8 +138,22 @@
         //ojo derecho
         sphere5 = new THREE.Mesh(geometry, material);
         scene.add(sphere5);
-        sphere5.position.set(0.6, 5.5, 3.2);
+        sphere5.position.set(0.5, 5.5, 3.2);
         sphere5.name = "ojoder";
+
+        //nariz
+        sphere7 = new THREE.Mesh(geometry, material2);
+        scene.add(sphere7);
+        sphere7.position.set(0, 4.8, 3.2);
+        sphere7.scale.set(0.6, 0.6, 1.1);       
+        sphere7.name = "nariz";
+        
+        //cascabel
+        sphere8 = new THREE.Mesh(geometry, material3);
+        scene.add(sphere8);
+        sphere8.position.set(0, 0.8, 4.2);
+        sphere8.scale.set(0.4, 0.4, 0.4);       
+        sphere8.name = "cascabel";
       }
 
       function createCylinder() {
