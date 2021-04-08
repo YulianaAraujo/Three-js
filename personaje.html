@@ -32,11 +32,8 @@
       />
     </div>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/three.js/94/three.min.js"
-      integrity="sha512-ZGgXd6TB5qjtvTU6Q5o/LJM4pwLNy8U8XXJh+vJZDXp2wC8ASrl4WOeivaq2fpYc3TnTCLzyDvVjY8YhvNYaXg=="
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/94/three.min.js" integrity="sha512-ZGgXd6TB5qjtvTU6Q5o/LJM4pwLNy8U8XXJh+vJZDXp2wC8ASrl4WOeivaq2fpYc3TnTCLzyDvVjY8YhvNYaXg==" crossorigin="anonymous"></script>
+
     <script>
       var scene;
       var camera;
@@ -74,7 +71,8 @@
       function createRenderer() {
         renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+        document.body.appendChild(renderer.domElement)
+
         renderer.render(scene, camera);
       }
 
@@ -198,7 +196,6 @@
         sphere12.position.set(0.3, 4.8, 4.8);
         sphere12.scale.set(0.12, 0.15, 0.1);
         sphere12.name = "pupder";
-
       }
 
       function createCylinder() {
@@ -216,7 +213,7 @@
         cylinder = new THREE.Mesh(geometry, material);
         scene.add(cylinder);
         cylinder.position.set(0, 1.7, 0);
-        cylinder.scale.y=0.1;
+        cylinder.scale.y = 0.1;
         cylinder.name = "collar";
 
         //cuerpo
