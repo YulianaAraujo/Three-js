@@ -72,17 +72,18 @@
       function createCube() {
         controls = new (function () {
           this.AñadirEdificio = function () {
-            cubeSize = Math.ceil(Math.random() * 15);
+            cubeSize = Math.ceil(Math.random() * 30);
 
-            cubeGeometry = new THREE.BoxGeometry(2, cubeSize, 2);
+            cubeGeometry = new THREE.BoxGeometry(3, cubeSize, 3);
             cubeMaterial = new THREE.MeshPhongMaterial({
               color: Math.random() * 0xffffff, flatShading: true
             });
             cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+
+            cube.receiveShadow = true;
             cube.castShadow = true;
 
             cube.position.x = -55 + Math.round(Math.random() * 100);
-            cube.position.y = Math.round(Math.random() * 10);
             cube.position.z = -10 + Math.round(Math.random() * 50);
           
             scene.add(cube);
