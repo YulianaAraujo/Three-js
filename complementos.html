@@ -80,9 +80,9 @@
             cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
             cube.castShadow = true;
 
-            
+            cube.position.x = -55 + Math.round(Math.random() * 100);
             cube.position.y = Math.round(Math.random() * 2);
-            
+            cube.position.z = -10 + Math.round(Math.random() * 50);
           
             scene.add(cube);
             this.numberOfObjects = scene.children.length;
