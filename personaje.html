@@ -94,9 +94,7 @@
         controls = new THREE.OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;     
         controls.dampingFactor = 2;   
-        controls.update();
-               
-        stats.update();
+
       }
 
       
@@ -312,6 +310,8 @@
       function animate(time) {
         requestAnimationFrame(animate);
         renderer.render(scene, camera);
+        controls.update();               
+        stats.update();
       }
 
       init();
