@@ -8,6 +8,7 @@
     <style>
       .header {
         display: flex;
+        height: 150px;
       }
 
       .img {
@@ -19,6 +20,8 @@
     </style>
   </head>
   <body>
+    <div id="myStats"></div>
+
     <div class="header">
       <img
         class="img"
@@ -31,8 +34,11 @@
         alt="freeCodeCamp"
       />
     </div>
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/94/three.min.js" integrity="sha512-ZGgXd6TB5qjtvTU6Q5o/LJM4pwLNy8U8XXJh+vJZDXp2wC8ASrl4WOeivaq2fpYc3TnTCLzyDvVjY8YhvNYaXg==" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/three@0.85.0/examples/js/controls/OrbitControls.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.js"></script>
+    
 
     <script>
       var scene;
@@ -56,6 +62,18 @@
       var cylinder2;
       var cylinder3;
       var cylinder4;
+      var stats;
+      var controls;
+
+      function createStats() {
+        stats = new Stats();
+        stats.setMode(2); // 0: fps, 1: ms, 2memory
+        stats.domElement.style.position = "absolute";
+        stats.domElement.style.left = "10px";
+        stats.domElement.style.top = "160px";
+        document.getElementById("myStats").appendChild(stats.domElement);
+        return stats;
+      }
 
       function createCamera() {
         camera = new THREE.PerspectiveCamera(
@@ -71,10 +89,17 @@
       function createRenderer() {
         renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement)
+        document.body.appendChild(renderer.domElement);
 
-        renderer.render(scene, camera);
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;     
+        controls.dampingFactor = 2;   
+        controls.update();
+               
+        stats.update();
       }
+
+      
 
       function createSphere() {
         let geometry = new THREE.SphereGeometry(4.1, 40, 40);
@@ -158,14 +183,14 @@
         //nariz
         sphere7 = new THREE.Mesh(geometry, material2);
         scene.add(sphere7);
-        sphere7.position.set(0, 4.5, 3.2);
-        sphere7.scale.set(0.6, 0.6, 1.1);
+        sphere7.position.set(0, 4.6, 4.1);
+        sphere7.scale.set(0.4, 0.4, 0.4);
         sphere7.name = "nariz";
 
         //cascabel
         sphere8 = new THREE.Mesh(geometry, material3);
         scene.add(sphere8);
-        sphere8.position.set(0, 0.8, 4.2);
+        sphere8.position.set(0, 1.45, 3.2);
         sphere8.scale.set(0.4, 0.4, 0.4);
         sphere8.name = "cascabel";
 
@@ -186,14 +211,14 @@
         //pupila izquierda
         sphere11 = new THREE.Mesh(geometry, material4);
         scene.add(sphere11);
-        sphere11.position.set(-0.3, 4.8, 4.8);
+        sphere11.position.set(-0.3, 5.4, 4.2);
         sphere11.scale.set(0.12, 0.15, 0.1);
         sphere11.name = "pupizq";
 
         //pupila derecha
         sphere12 = new THREE.Mesh(geometry, material4);
         scene.add(sphere12);
-        sphere12.position.set(0.3, 4.8, 4.8);
+        sphere12.position.set(0.3, 5.4, 4.2);
         sphere12.scale.set(0.12, 0.15, 0.1);
         sphere12.name = "pupder";
       }
@@ -234,7 +259,7 @@
         cylinder3 = new THREE.Mesh(geometry, material);
         scene.add(cylinder3);
         cylinder3.position.set(-1.57, -3, 0);
-
+        
         //pierna derecha
         cylinder4 = new THREE.Mesh(geometry, material);
         scene.add(cylinder4);
@@ -264,7 +289,7 @@
       function init() {
         //create scene
         scene = new THREE.Scene();
-
+        
         //create camera
         createCamera();
 
@@ -275,12 +300,22 @@
         createCylinder();
         createSmallCylinder();
         createLongCylinder();
+     
+        
+        //create stats
+        createStats();
 
         //create rederer
         createRenderer();
       }
 
+      function animate(time) {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+
       init();
+      requestAnimationFrame(animate);
     </script>
   </body>
 </html>
