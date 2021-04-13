@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>QUIZ 2</title>
+    <title>TallerComplementos</title>
   </head>
   <body>
     <div id="myStats"></div>
@@ -51,6 +51,7 @@
       function createRenderer() {
         renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMapEnabled = true;
         document.body.appendChild(renderer.domElement);
 
         controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -59,7 +60,7 @@
 
       function createPlane() {
         let PlaneGeometry = new THREE.PlaneGeometry(200, 100, 1, 1);
-        let Material = new THREE.MeshPhongMaterial({ color: "#646b63" });
+        let Material = new THREE.MeshPhongMaterial({ color: "#646b63", flatShading: true });
         plane = new THREE.Mesh(PlaneGeometry, Material);
         scene.add(plane);
 
@@ -75,13 +76,13 @@
 
             cubeGeometry = new THREE.BoxGeometry(2, cubeSize, 2);
             cubeMaterial = new THREE.MeshPhongMaterial({
-              color: Math.random() * 0xffffff,
+              color: Math.random() * 0xffffff, flatShading: true
             });
             cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
             cube.castShadow = true;
 
             cube.position.x = -55 + Math.round(Math.random() * 100);
-            cube.position.y = Math.round(Math.random() * 2);
+            cube.position.y = Math.round(Math.random() * 10);
             cube.position.z = -10 + Math.round(Math.random() * 50);
           
             scene.add(cube);
@@ -104,8 +105,9 @@
 
       function createSpotlight() {
         let spotLight = new THREE.SpotLight(0xffffff);
-        spotLight.position.set(-100, 60, -200);
+        spotLight.position.set(0, 60, -200);
         spotLight.castShadow = true;
+        spotLight.receiveShadow = true;
         scene.add(spotLight);
       }
 
@@ -132,8 +134,6 @@
         createRenderer();
       }
       function animate(time) {
-        //sphere.position.x = Math.cos(time * 0.005);
-        //sphere.position.z = Math.sin(time * 0.005);
         requestAnimationFrame(animate);
         renderer.render(scene, camera);
         controls.update();
